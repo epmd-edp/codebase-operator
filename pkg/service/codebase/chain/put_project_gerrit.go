@@ -2,6 +2,7 @@ package chain
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
 	edpv1alpha1 "github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
@@ -19,6 +20,7 @@ import (
 type PutProjectGerrit struct {
 	next      handler.CodebaseHandler
 	clientSet openshift.ClientSet
+	DB        sql.DB
 }
 
 const (
@@ -37,7 +39,7 @@ func (h PutProjectGerrit) ServeRequest(c *v1alpha1.Codebase) error {
 		return errors.Wrapf(err, "an error has been occurred while updating %v Codebase status", c.Name)
 	}
 
-	wd := fmt.Sprintf("/home/codebase-operator/edp/%v/%v", c.Namespace, c.Name)
+	wd := fmt.Sprintf("/home/codebase-operator/edp/%v/%v/templates", c.Namespace, c.Name)
 	if err := util.CreateDirectory(wd); err != nil {
 		return err
 	}
@@ -65,13 +67,14 @@ func (h PutProjectGerrit) ServeRequest(c *v1alpha1.Codebase) error {
 
 	if err := h.tryToCloneRepo(*ru, repu, repp, wd, c.Name); err != nil {
 		setFailedFields(*c, edpv1alpha1.GerritRepositoryProvisioning, err.Error())
-		return errors.Wrap(err, "clonning project hsa been failed")
+		return errors.Wrap(err, "cloning project hsa been failed")
 	}
 
 	if err := h.tryToPushProjectToGerrit(gs.SshPort, c.Name, wd, c.Namespace); err != nil {
 		setFailedFields(*c, edpv1alpha1.GerritRepositoryProvisioning, err.Error())
 		return errors.Wrapf(err, "push to gerrit for codebase %v has been failed", c.Name)
 	}
+
 	rLog.Info("end creating project in Gerrit")
 	return nextServeOrNil(h.next, c)
 }
