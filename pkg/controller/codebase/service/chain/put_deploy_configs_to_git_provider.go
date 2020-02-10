@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
 	edpv1alpha1 "github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
+	"github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/service/chain/handler"
+	template2 "github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/service/template"
 	git "github.com/epmd-edp/codebase-operator/v2/pkg/controller/gitserver"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/openshift"
-	"github.com/epmd-edp/codebase-operator/v2/pkg/service/codebase/chain/handler"
-	"github.com/epmd-edp/codebase-operator/v2/pkg/service/codebase/template"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/util"
 	"github.com/pkg/errors"
 )
@@ -45,7 +45,7 @@ func (h PutDeployConfigsToGitProvider) tryToPushConfigs(c v1alpha1.Codebase) err
 	gf := fmt.Sprintf("%v/%v", td, c.Name)
 	log.Info("path to local Git folder", "path", gf)
 
-	if err := template.PrepareTemplates(h.clientSet.CoreClient, c); err != nil {
+	if err := template2.PrepareTemplates(h.clientSet.CoreClient, c); err != nil {
 		return err
 	}
 
