@@ -12,6 +12,7 @@ import (
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	"time"
 )
 
@@ -45,6 +46,11 @@ func (h PutJenkinsFolder) putJenkinsFolder(c *v1alpha1.Codebase) error {
 		return nil
 	}
 
+	j, err := h.getFirstJenkinsInstance(c.Namespace)
+	if err != nil {
+		return err
+	}
+
 	jf := &jenkinsv1alpha1.JenkinsFolder{
 		TypeMeta: metav1.TypeMeta{
 			APIVersion: "v2.edp.epam.com/v1alpha1",
@@ -59,6 +65,13 @@ func (h PutJenkinsFolder) putJenkinsFolder(c *v1alpha1.Codebase) error {
 					Kind:               util.CodebaseKind,
 					Name:               c.Name,
 					UID:                c.UID,
+					BlockOwnerDeletion: newTrue(),
+				},
+				{
+					APIVersion:         "v2.edp.epam.com/v1alpha1",
+					Kind:               util.JenkinsKind,
+					Name:               j.Name,
+					UID:                j.UID,
 					BlockOwnerDeletion: newTrue(),
 				},
 			},
@@ -118,4 +131,28 @@ func (h PutJenkinsFolder) updateStatus(c *v1alpha1.Codebase) error {
 		}
 	}
 	return nil
+}
+
+func (h PutJenkinsFolder) getFirstJenkinsInstance(namespace string) (*jenkinsv1alpha1.Jenkins, error) {
+	list := &jenkinsv1alpha1.JenkinsList{}
+	if err := h.clientSet.Client.List(context.TODO(), &client.ListOptions{Namespace: namespace}, list); err != nil {
+		return nil, errors.Wrapf(err, "couldn't get Jenkins instances in namespace %v", namespace)
+	}
+	if len(list.Items) == 0 {
+		return nil, fmt.Errorf("at least one Jenkins instance should be accessible")
+	}
+	j := list.Items[0]
+	return h.getJenkinsInstance(j.Name, j.Namespace)
+}
+
+func (h PutJenkinsFolder) getJenkinsInstance(name, namespace string) (*jenkinsv1alpha1.Jenkins, error) {
+	nsn := types.NamespacedName{
+		Namespace: namespace,
+		Name:      name,
+	}
+	instance := &jenkinsv1alpha1.Jenkins{}
+	if err := h.clientSet.Client.Get(context.TODO(), nsn, instance); err != nil {
+		return nil, errors.Wrapf(err, "failed to get jenkins instance by name %v", name)
+	}
+	return instance, nil
 }

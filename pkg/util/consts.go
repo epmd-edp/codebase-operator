@@ -29,4 +29,5 @@ const (
 	Javascript     = "javascript"
 
 	CodebaseKind = "Codebase"
+	JenkinsKind  = "Jenkins"
 )
