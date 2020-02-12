@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5d4006b_2339f1e2",
+        "filename": "deploy-templates/crds/edp_v1alpha1_codebase_cr.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2020-02-12T15:09:28Z",
+      "side": 1,
+      "message": "in constant you have \"edp\"",
+      "range": {
+        "startLine": 14,
+        "startChar": 11,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "e52e66390efcb30fbfc4df7ba2bedd380ad2555f",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
