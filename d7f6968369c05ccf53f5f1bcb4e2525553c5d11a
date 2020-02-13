@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "873408df_edb2c50d",
+        "filename": "deploy-templates/crds/edp_v1alpha1_codebasebranch_cr.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2020-02-13T06:58:50Z",
+      "side": 1,
+      "message": "it\u0027s a string that should contain full version like 0.0.0.1",
+      "range": {
+        "startLine": 14,
+        "startChar": 23,
+        "endLine": 14,
+        "endChar": 43
+      },
+      "revId": "d7f6968369c05ccf53f5f1bcb4e2525553c5d11a",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a213882c_d248b2c7",
+        "filename": "pkg/apis/edp/v1alpha1/codebasebranch_types.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2020-02-13T06:58:50Z",
+      "side": 1,
+      "message": "it\u0027s a string",
+      "range": {
+        "startLine": 31,
+        "startChar": 21,
+        "endLine": 31,
+        "endChar": 30
+      },
+      "revId": "d7f6968369c05ccf53f5f1bcb4e2525553c5d11a",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
