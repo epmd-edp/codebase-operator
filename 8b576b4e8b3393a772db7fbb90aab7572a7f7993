@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "974981b6_5d6ad0cb",
+        "filename": "pkg/apis/edp/v1alpha1/codebase_types.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-03-03T08:13:50Z",
+      "side": 1,
+      "message": "I prefer call it releasedVersions, or versions",
+      "range": {
+        "startLine": 75,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 17
+      },
+      "revId": "8b576b4e8b3393a772db7fbb90aab7572a7f7993",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    }
+  ]
+}
