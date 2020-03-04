@@ -14,11 +14,13 @@ type CodebaseBranchSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book.kubebuilder.io/beyond_basics/generating_crd.html
-	CodebaseName string  `json:"codebaseName"`
-	BranchName   string  `json:"branchName"`
-	FromCommit   string  `json:"fromCommit"`
-	Version      *string `json:"version,omitempty"`
-	Build        *string `json:"build,omitempty"`
+	CodebaseName  string  `json:"codebaseName"`
+	BranchName    string  `json:"branchName"`
+	FromCommit    string  `json:"fromCommit"`
+	Version       *string `json:"version,omitempty"`
+	Build         *string `json:"build,omitempty"`
+	Release       bool    `json:"release"`
+	MasterVersion *string `json:"masterVersion,omitempty"`
 }
 
 // CodebaseBranchStatus defines the observed state of CodebaseBranch

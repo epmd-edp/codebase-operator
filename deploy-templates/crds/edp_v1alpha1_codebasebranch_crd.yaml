@@ -41,10 +41,15 @@ spec:
                 type: string
               build:
                 type: string
+              release:
+                type: bool
+              masterVersion:
+                type: string
             required:
               - codebaseName
               - branchName
               - fromCommit
+              - release
             type: object
           status:
             type: object
