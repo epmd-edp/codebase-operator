@@ -6,6 +6,7 @@ import (
 	edpv1alpha1 "github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebasebranch/service"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/openshift"
+	"github.com/epmd-edp/codebase-operator/v2/pkg/util"
 	"github.com/epmd-edp/jenkins-operator/v2/pkg/apis/v2/v1alpha1"
 	"github.com/pkg/errors"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
@@ -114,6 +115,29 @@ func (r *ReconcileCodebaseBranch) Reconcile(request reconcile.Request) (reconcil
 	}
 
 	if err := r.codebaseBranchService.TriggerReleaseJob(i); err != nil {
+		return reconcile.Result{}, err
+	}
+
+	if !util.SearchVersion(i.Status.VersionHistory, *i.Spec.Version) {
+		request.Name = c.Name + "-master"
+		mb := &edpv1alpha1.CodebaseBranch{}
+		if err := r.client.Get(context.TODO(), request.NamespacedName, mb); err != nil {
+			if k8serrors.IsNotFound(err) {
+				return reconcile.Result{}, nil
+			}
+			return reconcile.Result{}, err
+		}
+
+		if err := r.codebaseBranchService.ResetMasterBranchBuildCounter(mb); err != nil {
+			return reconcile.Result{}, err
+		}
+
+		if err := r.codebaseBranchService.ResetMasterBranchSuccessBuildCounter(mb); err != nil {
+			return reconcile.Result{}, err
+		}
+	}
+
+	if err := r.codebaseBranchService.AppendVersionToTheHistorySlice(i); err != nil {
 		return reconcile.Result{}, err
 	}
 
