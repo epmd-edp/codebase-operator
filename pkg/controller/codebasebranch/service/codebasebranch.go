@@ -112,6 +112,38 @@ func (s *CodebaseBranchService) setFailStatus(cb *v1alpha1.CodebaseBranch, actio
 
 }
 
+func (s *CodebaseBranchService) AppendVersionToTheHistorySlice(b *v1alpha1.CodebaseBranch) error {
+	if b.Spec.Version == nil {
+		return nil
+	}
+	v := b.Spec.Version
+	b.Status.VersionHistory = append(b.Status.VersionHistory, *v)
+	return s.updateStatus(b)
+}
+
+func (s *CodebaseBranchService) ResetMasterBranchBuildCounter(mb *v1alpha1.CodebaseBranch) error {
+	v := "0"
+	if mb.Spec.Build == nil {
+		return nil
+	}
+
+	b := mb.Spec.Build
+	if *b != "0" {
+		mb.Spec.Build = &v
+	}
+
+	return s.updateStatus(mb)
+}
+
+func (s *CodebaseBranchService) ResetMasterBranchSuccessBuildCounter(mb *v1alpha1.CodebaseBranch) error {
+	if mb.Status.LastSuccessfulBuild == nil {
+		return nil
+	}
+
+	mb.Status.LastSuccessfulBuild = nil
+	return s.updateStatus(mb)
+}
+
 func (s *CodebaseBranchService) setSuccessStatus(cb *v1alpha1.CodebaseBranch, action v1alpha1.ActionType) error {
 	cb.Status = v1alpha1.CodebaseBranchStatus{
 		LastTimeUpdated: time.Now(),
