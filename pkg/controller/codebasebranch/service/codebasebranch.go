@@ -8,6 +8,7 @@ import (
 	"github.com/epmd-edp/codebase-operator/v2/pkg/jenkins"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/model"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/openshift"
+	"github.com/epmd-edp/codebase-operator/v2/pkg/util"
 	"github.com/pkg/errors"
 	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
 	"time"
@@ -110,6 +111,40 @@ func (s *CodebaseBranchService) setFailStatus(cb *v1alpha1.CodebaseBranch, actio
 	}
 	return s.updateStatus(cb)
 
+}
+
+func (s *CodebaseBranchService) AppendVersionToTheHistorySlice(b *v1alpha1.CodebaseBranch) error {
+	if b.Spec.Version != nil {
+		v := b.Spec.Version
+		if !util.SearchVersion(b.Status.VersionHistory, *v) {
+			b.Status.VersionHistory = append(b.Status.VersionHistory, *v)
+			return s.updateStatus(b)
+		}
+	}
+	return nil
+}
+
+func (s *CodebaseBranchService) ResetMasterBranchBuildCounter(mb *v1alpha1.CodebaseBranch) error {
+	v := "0"
+	if mb.Spec.Build == nil {
+		return nil
+	}
+
+	b := mb.Spec.Build
+	if *b != "0" {
+		mb.Spec.Build = &v
+	}
+
+	return s.updateStatus(mb)
+}
+
+func (s *CodebaseBranchService) ResetMasterBranchSuccessBuildCounter(mb *v1alpha1.CodebaseBranch) error {
+	if mb.Status.LastSuccessfulBuild == nil {
+		return nil
+	}
+
+	mb.Status.LastSuccessfulBuild = nil
+	return s.updateStatus(mb)
 }
 
 func (s *CodebaseBranchService) setSuccessStatus(cb *v1alpha1.CodebaseBranch, action v1alpha1.ActionType) error {
