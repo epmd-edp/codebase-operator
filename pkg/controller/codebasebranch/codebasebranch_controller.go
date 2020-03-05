@@ -5,6 +5,7 @@ import (
 	"fmt"
 	edpv1alpha1 "github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebasebranch/service"
+	"github.com/epmd-edp/codebase-operator/v2/pkg/model"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/openshift"
 	"github.com/epmd-edp/jenkins-operator/v2/pkg/apis/v2/v1alpha1"
 	"github.com/pkg/errors"
@@ -115,6 +116,25 @@ func (r *ReconcileCodebaseBranch) Reconcile(request reconcile.Request) (reconcil
 
 	if err := r.codebaseBranchService.TriggerReleaseJob(i); err != nil {
 		return reconcile.Result{}, err
+	}
+
+	if i.Spec.Release && i.Status.Status != model.StatusFinished {
+		request.Name = c.Name + "-master"
+		mb := &edpv1alpha1.CodebaseBranch{}
+		if err := r.client.Get(context.TODO(), request.NamespacedName, mb); err != nil {
+			if k8serrors.IsNotFound(err) {
+				return reconcile.Result{}, nil
+			}
+			return reconcile.Result{}, err
+		}
+
+		if err := r.codebaseBranchService.ResetMasterBranchBuildCounter(mb); err != nil {
+			return reconcile.Result{}, err
+		}
+
+		if err := r.codebaseBranchService.ResetMasterBranchSuccessBuildCounter(mb); err != nil {
+			return reconcile.Result{}, err
+		}
 	}
 
 	rl.Info("Reconciling CodebaseBranch has been finished")

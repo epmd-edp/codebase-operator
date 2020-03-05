@@ -112,6 +112,30 @@ func (s *CodebaseBranchService) setFailStatus(cb *v1alpha1.CodebaseBranch, actio
 
 }
 
+func (s *CodebaseBranchService) ResetMasterBranchBuildCounter(mb *v1alpha1.CodebaseBranch) error {
+	v := "0"
+	if mb.Spec.Build == nil {
+		return nil
+	}
+
+	b := mb.Spec.Build
+	if *b != "0" {
+		mb.Spec.Build = &v
+	}
+
+	return s.updateStatus(mb)
+}
+
+func (s *CodebaseBranchService) ResetMasterBranchSuccessBuildCounter(mb *v1alpha1.CodebaseBranch) error {
+	sb := mb.Status.LastSuccessfulBuild
+
+	if sb != nil {
+		mb.Status.LastSuccessfulBuild = nil
+	}
+
+	return s.updateStatus(mb)
+}
+
 func (s *CodebaseBranchService) setSuccessStatus(cb *v1alpha1.CodebaseBranch, action v1alpha1.ActionType) error {
 	cb.Status = v1alpha1.CodebaseBranchStatus{
 		LastTimeUpdated: time.Now(),
