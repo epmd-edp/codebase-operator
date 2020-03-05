@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9c530ae_12af3316",
+        "filename": "deploy-templates/templates/clusterrole_openshift.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-03-05T08:50:26Z",
+      "side": 1,
+      "message": "Do we really need this privileges to be cluster wide? Is admin role in namespace not enough?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 10
+      },
+      "revId": "063ec8a8e15725868cfd963a6b13984a3f563cd7",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89bd6693_e746b54d",
+        "filename": "deploy-templates/templates/rolebinding_kubernetes.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-03-05T08:50:26Z",
+      "side": 1,
+      "message": "This file should be removed since we decided to add kubernetes support later",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 11
+      },
+      "revId": "063ec8a8e15725868cfd963a6b13984a3f563cd7",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86421d84_7503159a",
+        "filename": "deploy-templates/templates/secrets.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-03-05T08:50:26Z",
+      "side": 1,
+      "message": "It is not supposed to store secrets in repositories. This secret should come from database service",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "063ec8a8e15725868cfd963a6b13984a3f563cd7",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    }
+  ]
+}
