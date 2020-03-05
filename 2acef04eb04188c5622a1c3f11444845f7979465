@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8da84d5_52adc314",
+        "filename": "deploy-templates/templates/clusterrole_openshift.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-03-05T14:12:55Z",
+      "side": 1,
+      "message": "Looks like it\u0027s not necessary for this operator",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 12
+      },
+      "revId": "2acef04eb04188c5622a1c3f11444845f7979465",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    }
+  ]
+}
