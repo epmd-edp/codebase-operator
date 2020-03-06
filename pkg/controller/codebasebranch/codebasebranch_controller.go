@@ -118,10 +118,12 @@ func (r *ReconcileCodebaseBranch) Reconcile(request reconcile.Request) (reconcil
 		return reconcile.Result{}, err
 	}
 
-	if hasNewVersion(i) {
-		err := r.processNewVersion(i)
-		if err != nil {
-			return reconcile.Result{}, err
+	if c.Spec.Versioning.Type == "edp" {
+		if hasNewVersion(i) {
+			err := r.processNewVersion(i)
+			if err != nil {
+				return reconcile.Result{}, err
+			}
 		}
 	}
 
