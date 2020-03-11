@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6271b644_ec790192",
+        "filename": "pkg/controller/codebase/service/chain/put_s2i_is.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-03-11T07:53:30Z",
+      "side": 1,
+      "message": "Why do we skip it only for Java?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 2
+      },
+      "revId": "edb0a5eab5c2615e16cddaa7d6cb2fddfda03950",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "006e2f5c_6cf284cd",
+        "filename": "pkg/util/url.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-03-11T07:53:30Z",
+      "side": 1,
+      "message": "All these check looks weird for me",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "edb0a5eab5c2615e16cddaa7d6cb2fddfda03950",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21801672_dbe62e64",
+        "filename": "pkg/util/url.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-03-11T07:53:30Z",
+      "side": 1,
+      "message": "Do we really need this local function?",
+      "range": {
+        "startLine": 52,
+        "startChar": 24,
+        "endLine": 58,
+        "endChar": 2
+      },
+      "revId": "edb0a5eab5c2615e16cddaa7d6cb2fddfda03950",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c800abe0_5a97a648",
+        "filename": "pkg/util/url.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-03-11T07:53:30Z",
+      "side": 1,
+      "message": "The same",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 3
+      },
+      "revId": "edb0a5eab5c2615e16cddaa7d6cb2fddfda03950",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    }
+  ]
+}
