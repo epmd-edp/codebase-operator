@@ -15,10 +15,56 @@ import (
 
 var log = logf.Log.WithName("codebase_branch_service")
 
-const jenkinsJobSuccessStatus = "blue"
+const (
+	jenkinsJobSuccessStatus = "blue"
+	jenkinsCIuser = "jenkins"
+	gitServerVersion = "v2"
+	jobProvisioner = "default"
+)
 
 type CodebaseBranchService struct {
 	Cs openshift.ClientSet
+	Codebase *v1alpha1.Codebase
+	Git *v1alpha1.GitServer
+}
+
+
+func (s *CodebaseBranchService) TriggerJobProvision(cb *v1alpha1.CodebaseBranch) error {
+	rLog := log.WithValues("codebase branch", cb.Name, "job provisioner", jobProvisioner)
+	rLog.V(2).Info("start triggering job provisioner")
+
+	jc, err := initJenkinsClient(s.Cs, cb.Namespace)
+	if err != nil {
+		if err := s.setFailStatus(cb, edpv1alpha1.JenkinsConfiguration, err.Error()); err != nil {
+			return err
+		}
+		return errors.Wrap(err, "couldn't create jenkins client")
+	}
+	rLog.V(2).Info("start job provisioning")
+	url := fmt.Sprintf("ssh://%v@gerrit.%v:%v/%v", jenkinsCIuser, s.Codebase.Namespace, s.Git.Spec.SshPort, s.Codebase.Name)
+	if err = jc.TriggerJobProvision(cb.Spec.BranchName, s.Codebase.Spec.Type, s.Codebase.Spec.BuildTool, s.Codebase.Spec.GitServer, gitServerVersion, s.Git.Spec.NameSshKeySecret, url, jobProvisioner); err != nil {
+	if err := s.setFailStatus(cb, edpv1alpha1.JenkinsConfiguration, err.Error()); err != nil {
+			return err
+		}
+		return err
+	}
+	rLog.Info("Job-provisioner has been triggered")
+
+	rj := fmt.Sprintf("job-provisions/job/%v", jobProvisioner)
+	js, err := jc.GetJobStatus(rj, 10*time.Second, 50)
+	if err != nil {
+		if err := s.setFailStatus(cb, edpv1alpha1.JenkinsConfiguration, err.Error()); err != nil {
+			return err
+		}
+		return err
+	}
+
+	if js != jenkinsJobSuccessStatus {
+		rLog.Info("failed to provision jobs", "job provisioner status", js)
+		return nil
+	}
+	rLog.Info("Job Provision has been created. Status: %v", model.StatusFinished)
+	return s.setSuccessStatus(cb, edpv1alpha1.JenkinsConfiguration)
 }
 
 func (s *CodebaseBranchService) TriggerReleaseJob(cb *v1alpha1.CodebaseBranch) error {

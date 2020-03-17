@@ -59,6 +59,26 @@ func (c JenkinsClient) TriggerReleaseJob(branchName string, fromCommit string, a
 	return errors.New(fmt.Sprintf("Couldn't trigger %v job", jobName))
 }
 
+func (c JenkinsClient) TriggerJobProvision (branchName, applicationType, buildTool, gitServerName, gitServerVersion, gitCredentials, repositoryPath, jobProvisioner string) error {
+	JobProvisionName := fmt.Sprintf("job-provisions/job/%v", jobProvisioner)
+	log.Info("Trying to trigger job-provisioner", "name", JobProvisionName)
+
+	if c.GetJob(JobProvisionName, time.Second, 60) {
+		_, err := c.Jenkins.BuildJob(JobProvisionName, map[string]string{
+			"NAME": branchName,
+			"TYPE": applicationType,
+			"BUILD_TOOL": buildTool,
+			"BRANCH": branchName,
+			"GIT_SERVER_CR_NAME": gitServerName,
+			"GIT_SERVER_CR_VERSION": gitServerVersion,
+			"GIT_CREDENTIALS_ID": gitCredentials,
+			"REPOSITORY_PATH": repositoryPath,
+		})
+		return err
+	}
+	return errors.New(fmt.Sprintf("Couldn't trigger %v job", JobProvisionName))
+}
+
 func (c JenkinsClient) GetJobStatus(name string, delay time.Duration, retryCount int) (string, error) {
 	time.Sleep(delay)
 	for i := 0; i < retryCount; i++ {
