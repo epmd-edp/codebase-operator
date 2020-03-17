@@ -15,10 +15,12 @@ import (
 
 var log = logf.Log.WithName("codebase_branch_service")
 
-const jenkinsJobSuccessStatus = "blue"
+const (
+	jenkinsJobSuccessStatus = "blue"
+)
 
 type CodebaseBranchService struct {
-	Cs openshift.ClientSet
+	Cs 	openshift.ClientSet
 }
 
 func (s *CodebaseBranchService) TriggerReleaseJob(cb *v1alpha1.CodebaseBranch) error {
@@ -65,6 +67,15 @@ func (s *CodebaseBranchService) TriggerReleaseJob(cb *v1alpha1.CodebaseBranch) e
 		return nil
 	}
 	rLog.Info("release has been created. Status: %v", model.StatusFinished)
+
+	if err = jc.TriggerBuildJob(cb.Spec.BranchName, cb.Spec.CodebaseName); err != nil {
+		if err := s.setFailStatus(cb, edpv1alpha1.JenkinsConfiguration, err.Error()); err != nil {
+			return err
+		}
+		return err
+	}
+	rLog.Info("Build pipeline has been triggered")
+
 	return s.setSuccessStatus(cb, edpv1alpha1.JenkinsConfiguration)
 }
 
