@@ -10,6 +10,7 @@ import (
 	"github.com/epmd-edp/codebase-operator/v2/pkg/openshift"
 	"github.com/pkg/errors"
 	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
+	"strings"
 	"time"
 )
 
@@ -43,7 +44,13 @@ func (s *CodebaseBranchService) TriggerReleaseJob(cb *v1alpha1.CodebaseBranch) e
 	}
 	rLog.V(2).Info("start creating release for codebase")
 
-	if err = jc.TriggerReleaseJob(cb.Spec.BranchName, cb.Spec.FromCommit, cb.Spec.CodebaseName); err != nil {
+	bn := cb.Spec.BranchName
+
+	if cb.Spec.Release {
+		bn = strings.Replace(bn, "/", "-'", 1)
+	}
+
+	if err = jc.TriggerReleaseJob(bn, cb.Spec.FromCommit, cb.Spec.CodebaseName); err != nil {
 		if err := s.setFailStatus(cb, edpv1alpha1.JenkinsConfiguration, err.Error()); err != nil {
 			return err
 		}
