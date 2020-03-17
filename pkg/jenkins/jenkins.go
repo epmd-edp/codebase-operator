@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
+	"strings"
 	"time"
 )
 
@@ -53,6 +54,19 @@ func (c JenkinsClient) TriggerReleaseJob(branchName string, fromCommit string, a
 		_, err := c.Jenkins.BuildJob(jobName, map[string]string{
 			"RELEASE_NAME": branchName,
 			"COMMIT_ID":    fromCommit,
+		})
+		return err
+	}
+	return errors.New(fmt.Sprintf("Couldn't trigger %v job", jobName))
+}
+
+func (c JenkinsClient) TriggerBuildJob (branchName string, projectName string) error {
+	jobName := fmt.Sprintf("%v/job/%v-Build-%v", projectName, strings.ToUpper(branchName), projectName)
+	log.Info("Trying to trigger Build pipeline", "name", jobName)
+	if c.GetJob(jobName, time.Second, 60) {
+		_, err := c.Jenkins.BuildJob(jobName, map[string]string{
+			"GERRIT_PROJECT_NAME": projectName,
+			"BRANCH":              branchName,
 		})
 		return err
 	}
@@ -154,7 +168,8 @@ func GetJenkinsUrl(jenkins jenkinsApi.Jenkins, namespace string) string {
 	key := fmt.Sprintf("%v/%v", jenkinsOperatorSpec.EdpAnnotationsPrefix, "externalUrl")
 	url := jenkins.Annotations[key]
 	if len(url) == 0 {
-		url := fmt.Sprintf("http://jenkins.%s:8080", namespace)
+		//url := fmt.Sprintf("http://jenkins.%s:8080", namespace)
+		url := fmt.Sprintf("https://jenkins-%s.delivery.aws.main.edp.projects.epam.com", namespace)
 		log.Info("annotation doesn't contain Jenkins url. creating from template", "url", url)
 		return url
 	}
