@@ -22,6 +22,30 @@
       "revId": "ccd2f6ad760cc43333173305a2e94bf2b76eb934",
       "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5ce3f4a_8ca76b22",
+        "filename": "pkg/controller/codebasebranch/service/codebasebranch.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-03-18T08:00:58Z",
+      "side": 1,
+      "message": "Because slashes here can appear only when it\u0027s release branch. In other words, it\u0027s prohibited by validation to create branch with a slash. But if there is nothing to replace,  Replace()  will not replace. So we can remove",
+      "parentUuid": "40a812a1_ad5afefa",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 2
+      },
+      "revId": "ccd2f6ad760cc43333173305a2e94bf2b76eb934",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
     }
   ]
 }
