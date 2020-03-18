@@ -1,0 +1,7 @@
+Code-Review+2: Stanislav Kostenko <stanislav_kostenko@epam.com>
+Verified+1: CI Jenkins
+Submitted-by: Stanislav Kostenko <stanislav_kostenko@epam.com>
+Submitted-at: Wed, 18 Mar 2020 16:11:41 +0000
+Reviewed-on: https://gerrit-oc-green-edp-cicd.delivery.aws.main.edp.projects.epam.com/c/codebase-operator/+/578
+Project: codebase-operator
+Branch: refs/heads/master
