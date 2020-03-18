@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40a812a1_ad5afefa",
+        "filename": "pkg/controller/codebasebranch/service/codebasebranch.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-03-18T07:53:57Z",
+      "side": 1,
+      "message": "Why do we do this only for release branch?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 2
+      },
+      "revId": "ccd2f6ad760cc43333173305a2e94bf2b76eb934",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    }
+  ]
+}
