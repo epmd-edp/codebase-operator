@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
+	"strconv"
 	"time"
 )
 
@@ -45,14 +46,15 @@ func (c JenkinsClient) GetJob(name string, delay time.Duration, retryCount int) 
 	return false
 }
 
-func (c JenkinsClient) TriggerReleaseJob(branchName string, fromCommit string, appName string) error {
+func (c JenkinsClient) TriggerReleaseJob(branchName string, fromCommit string, appName string, release bool) error {
 	jobName := fmt.Sprintf("%v/job/Create-release-%v", appName, appName)
 	log.Info("Trying to trigger jenkins job", "name", jobName)
 
 	if c.GetJob(jobName, time.Second, 60) {
 		_, err := c.Jenkins.BuildJob(jobName, map[string]string{
-			"RELEASE_NAME": branchName,
-			"COMMIT_ID":    fromCommit,
+			"RELEASE_NAME":      branchName,
+			"COMMIT_ID":         fromCommit,
+			"IS_RELEASE_BRANCH": strconv.FormatBool(release),
 		})
 		return err
 	}
