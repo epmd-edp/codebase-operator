@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60570eb8_19208c7a",
+        "filename": "pkg/jenkins/jenkins.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-03-23T09:06:08Z",
+      "side": 1,
+      "message": "Maybe, it would be better to pass git branch name here?",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 51
+      },
+      "revId": "c8303b39de8c660543df9617715bb1a1a02f81c9",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
+    }
+  ]
+}
