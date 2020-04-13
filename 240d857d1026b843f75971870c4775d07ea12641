@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c8ba80b_51157e78",
+        "filename": "pkg/controller/codebase/codebase_controller.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2020-04-13T09:37:56Z",
+      "side": 1,
+      "message": "It\u0027s not exponential",
+      "range": {
+        "startLine": 152,
+        "startChar": 1,
+        "endLine": 152,
+        "endChar": 27
+      },
+      "revId": "240d857d1026b843f75971870c4775d07ea12641",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "114e00ec_2ca2c155",
+        "filename": "pkg/controller/codebase/service/chain/put_jenkins_folder_cr.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2020-04-13T09:37:56Z",
+      "side": 1,
+      "message": "Put?",
+      "range": {
+        "startLine": 27,
+        "startChar": 30,
+        "endLine": 27,
+        "endChar": 32
+      },
+      "revId": "240d857d1026b843f75971870c4775d07ea12641",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
