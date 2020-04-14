@@ -35,11 +35,7 @@ spec:
               type: string
             type:
               type: string
-            description:
-              type: string
             framework:
-              type: string
-            testReportFramework:
               type: string
             buildTool:
               type: string
@@ -48,22 +44,6 @@ spec:
             versioning:
               properties:
                 type:
-                  type: string
-                startFrom:
-                  type: string
-              required:
-                - type
-            git:
-              properties:
-                url:
-                  type: string
-              required:
-                - url
-            route:
-              properties:
-                site:
-                  type: string
-                path:
                   type: string
               required:
                 - type
