@@ -19,7 +19,7 @@ type CodebaseBranchSpec struct {
 	FromCommit   string  `json:"fromCommit"`
 	Version      *string `json:"version,omitempty"`
 	Build        *string `json:"build,omitempty"`
-	Release      bool    `json:"release"`
+	Release      bool    `json:"release,omitempty"`
 }
 
 // CodebaseBranchStatus defines the observed state of CodebaseBranch
