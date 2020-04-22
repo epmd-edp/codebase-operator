@@ -237,6 +237,8 @@ func (s CodebaseService) pushBuildConfigs(codebaseSettings *model.CodebaseSettin
 		return err
 	}
 
+	defer util.RemoveDirectory(pathToCopiedGitFolder)
+
 	log.Println("End pushing build configs to remote git server...")
 	return nil
 }
