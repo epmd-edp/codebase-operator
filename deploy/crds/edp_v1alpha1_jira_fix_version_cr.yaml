@@ -1,0 +1,13 @@
+apiVersion: v2.edp.epam.com/v1alpha1
+kind: JiraFixVersion
+metadata:
+  name: codebase-0.0.1
+spec:
+  commits:
+    - commit: val1
+    - commit: val2
+  tickets:
+    - ticket: EPMDEDP-1111
+status:
+  status: "initialized"
+  LastTimeUpdated: 0001-01-01T00:00:00Z
