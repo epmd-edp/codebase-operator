@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6423d818_6c5b3498",
+        "filename": "deploy/crds/edp_v1alpha1_jira_fix_version_cr.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2020-05-13T13:42:57Z",
+      "side": 1,
+      "message": "Do we need to have key-value dictionary here ? Won\u0027t value be enough ?",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 26
+      },
+      "revId": "41a9165335283911ba1e69391fe3046d5f026933",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
