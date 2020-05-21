@@ -14,8 +14,9 @@ type JiraFixVersionSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
 	// Add custom validation using kubebuilder tags: https://book.kubebuilder.io/beyond_basics/generating_crd.html
-	Commits []string `json:"commits"`
-	Tickets []string `json:"tickets"`
+	Commits      []string `json:"commits"`
+	Tickets      []string `json:"tickets"`
+	CodebaseName string   `json:"codebaseName"`
 }
 
 // JiraFixVersionStatus defines the observed state of JiraFixVersion
