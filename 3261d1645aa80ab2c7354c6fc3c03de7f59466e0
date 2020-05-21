@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2984b85_8788941d",
+        "filename": "pkg/client/jira/adapter/jira_adapter.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2020-05-21T10:36:04Z",
+      "side": 1,
+      "message": "It is a mandatory field and we are just adding some value here or is it an easter egg ?",
+      "range": {
+        "startLine": 92,
+        "startChar": 15,
+        "endLine": 92,
+        "endChar": 38
+      },
+      "revId": "3261d1645aa80ab2c7354c6fc3c03de7f59466e0",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03467ee6_8efdfaec",
+        "filename": "pkg/client/jira/adapter/jira_adapter.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2020-05-21T10:36:04Z",
+      "side": 1,
+      "message": "Does this method always returns an error, whenever response code is out of expected values ? Otherwise, will it break any functionality, if request was proceeded, but rejected by the the server ?",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 8
+      },
+      "revId": "3261d1645aa80ab2c7354c6fc3c03de7f59466e0",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91795862_453268f4",
+        "filename": "pkg/client/jira/adapter/jira_adapter.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2020-05-21T10:36:04Z",
+      "side": 1,
+      "message": "Do we need this println here ?",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 8
+      },
+      "revId": "3261d1645aa80ab2c7354c6fc3c03de7f59466e0",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
