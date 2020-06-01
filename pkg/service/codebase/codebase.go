@@ -4,6 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
+	"net/url"
+	"os"
+	"strconv"
+	"strings"
+	"time"
+
 	edpv1alpha1 "github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/controller/platform"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/gerrit"
@@ -19,16 +26,10 @@ import (
 	"github.com/epmd-edp/codebase-operator/v2/pkg/util"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/vcs"
 	errWrap "github.com/pkg/errors"
-	"k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"log"
-	"net/url"
-	"os"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	logf "sigs.k8s.io/controller-runtime/pkg/runtime/log"
-	"strconv"
-	"strings"
-	"time"
+	"k8s.io/api/core/v1"
 )
 
 var zlog = logf.Log.WithName("codebase-service")
@@ -99,9 +100,11 @@ func (s CodebaseService) Create() error {
 	if cs.Strategy == ImportStrategy {
 		err = s.pushBuildConfigs(cs)
 		if err != nil {
+			err = s.removeRepositoryDirectory(cs)
 			setFailedFields(s, edpv1alpha1.SetupDeploymentTemplates, err.Error())
 			return errWrap.Wrap(err, "an error has been occurred while pushing build configs")
 		}
+		err = s.removeRepositoryDirectory(cs)
 	} else {
 		err = s.gerritConfiguration(cs)
 		if err != nil {
@@ -164,6 +167,19 @@ func (s CodebaseService) Create() error {
 		Value:           "active",
 	}
 
+	return nil
+}
+
+func (s CodebaseService) getRepositoryDirectory(cs *model.CodebaseSettings) string {
+	return fmt.Sprintf("%v/%v/%v", cs.WorkDir, getTemplateFolderName(cs.DeploymentScript), cs.Name)
+}
+
+func (s CodebaseService) removeRepositoryDirectory(cs *model.CodebaseSettings) error {
+	repositoryDirectory := s.getRepositoryDirectory(cs)
+	err := util.RemoveDirectory(repositoryDirectory)
+	if err != nil {
+		return errWrap.Wrap(err, "an error has been occurred while removing the repository directory")
+	}
 	return nil
 }
 
@@ -234,10 +250,6 @@ func (s CodebaseService) pushBuildConfigs(codebaseSettings *model.CodebaseSettin
 
 	err = s.trySetupS2I(*codebaseSettings)
 	if err != nil {
-		return err
-	}
-
-	if err := util.RemoveDirectory(pathToCopiedGitFolder); err != nil {
 		return err
 	}
 
