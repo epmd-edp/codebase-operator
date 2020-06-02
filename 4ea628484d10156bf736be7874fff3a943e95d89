@@ -16,6 +16,24 @@
       "revId": "4ea628484d10156bf736be7874fff3a943e95d89",
       "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25e860d8_f4d44805",
+        "filename": "documentation/puml/codebase_branch_chain.puml",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-06-02T15:11:19Z",
+      "side": 1,
+      "message": "Basically, we should do for every versioning type. But this diagram depicts current state",
+      "parentUuid": "2f7128e8_8b11d2be",
+      "revId": "4ea628484d10156bf736be7874fff3a943e95d89",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
     }
   ]
 }
