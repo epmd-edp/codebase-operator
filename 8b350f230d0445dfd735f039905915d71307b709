@@ -16,6 +16,24 @@
       "revId": "8b350f230d0445dfd735f039905915d71307b709",
       "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ded2f936_2a0d19ac",
+        "filename": "documentation/puml/codebase_branch_chain.puml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2020-06-02T15:06:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc1c0f17_2bcad997",
+      "revId": "8b350f230d0445dfd735f039905915d71307b709",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": false
     }
   ]
 }
