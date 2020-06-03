@@ -54,3 +54,5 @@ spec:
                   key: password
             - name: DB_SSL_MODE
               value: "disable"
+            - name: RECONCILATION_PERIOD_IN_MIN
+              value: "360"
