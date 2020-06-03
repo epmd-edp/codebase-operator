@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b17d3c15_6f2ba3df",
+        "filename": "deploy-templates/templates/deployment.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2020-06-03T14:50:26Z",
+      "side": 1,
+      "message": "It can be just RECONCILATION_PERIOD and document that value should be in minutes with comments. No need to include this information in the var itself",
+      "range": {
+        "startLine": 57,
+        "startChar": 20,
+        "endLine": 57,
+        "endChar": 47
+      },
+      "revId": "e434df637daa9498c38c7bb67ce4ee38fae10555",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
