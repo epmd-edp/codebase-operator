@@ -1,0 +1,8 @@
+Verified+1: CI Jenkins
+Code-Review+2: Pavlo Yemelianov <pavlo_yemelianov@epam.com>
+Code-Review+1: Serhii Shydlovskyi <serhii_shydlovskyi@epam.com>
+Submitted-by: Pavlo Yemelianov <pavlo_yemelianov@epam.com>
+Submitted-at: Wed, 10 Jun 2020 07:43:12 +0000
+Reviewed-on: https://gerrit-oc-green-edp-cicd.delivery.aws.main.edp.projects.epam.com/c/codebase-operator/+/2763
+Project: codebase-operator
+Branch: refs/heads/master
