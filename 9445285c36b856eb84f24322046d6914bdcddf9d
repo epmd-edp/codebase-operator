@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23ff20a9_a6033063",
+        "filename": "deploy-templates/templates/additional_templates/git_server.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2020-06-17T16:55:36Z",
+      "side": 1,
+      "message": "If this template is specific to gerrit, it does not make sense to store gerrit related resources in here. It should have only general templates, that will allow us to configure any git server. \nI would propose to move in Gerrit operator.",
+      "revId": "9445285c36b856eb84f24322046d6914bdcddf9d",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
