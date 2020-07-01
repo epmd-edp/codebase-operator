@@ -1,4 +1,4 @@
-FROM golang:1.10.3-alpine:3.11.6
+FROM golang:1.13.11-alpine3.11
 
 ENV OPERATOR=/usr/local/bin/codebase-operator \
     USER_UID=1001 \
