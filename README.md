@@ -1,8 +1,10 @@
-# How to Install Operator
+# Codebase operator
 
-EDP installation can be applied on two container orchestration platforms: OpenShift and Kubernetes.
+## Overview
 
-_**NOTE:** Installation of operators is platform-independent, that is why there is a unified instruction for deploying._
+Codebase operator is an EDP operator that is responsible for provisioning codebase entities. Operator installation can be applied on two container orchestration platforms: Openshift and Kubernetes.
+
+_**NOTE:** Operator is platform-independent, that is why there is an unified instruction for deploying._
 
 ## Prerequisites
 1. Linux machine or Windows Subsystem for Linux instance with [Helm 3](https://helm.sh/docs/intro/install/) installed;
@@ -23,7 +25,11 @@ In order to install the Codebase operator, follow the steps below:
      epamedp/codebase-operator      v2.4.0                          Helm chart for Golang application/service deplo...
      ```
   
-Parameters:
+    _**NOTE:** It is highly recommended to use the latest released version._
+
+3. Deploy operator:
+
+   Full available chart parameters list:
  ```
     - chart_version                                   # a version of CD Pipeline operator Helm chart;
     - global.edpName                                  # a namespace or a project name (in case of OpenShift);
@@ -40,14 +46,12 @@ Parameters:
     - jira.credentialName                             # Name of secret with credentials to Jira server;
  ```
  
-_**NOTE:** Follow instruction to create namespace [edp-install-openshift](https://github.com/epmd-edp/edp-install/blob/master/documentation/openshift_install_edp.md#install-edp) or [edp-install-kubernetes](https://github.com/epmd-edp/edp-install/blob/master/documentation/kubernetes_install_edp.md#install-edp)._
- 
-Inspect the sample of launching a Helm template for Codebase operator installation:
+Install operator in the <edp_cicd_project> namespace with helm command. Bellow is the installation command example:
 ```bash
 helm install codebase-operator epamedp/codebase-operator --version <chart_version> --namespace <edp_cicd_project> --set name=codebase-operator --set global.edpName=<edp_cicd_project> --set global.platform=<platform_type>
 ```
 
-* Check the <edp_cicd_project> namespace that should contain Deployment with your operator in a running status.
+* Check the <edp_cicd_project> namespace that should contain operator deployment with your operator in a running status
 
 ### Related Articles
 
