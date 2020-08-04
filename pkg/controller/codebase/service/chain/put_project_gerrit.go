@@ -118,7 +118,7 @@ func (h PutProjectGerrit) tryToPushProjectToGerrit(sshPort int32, codebaseName, 
 	}
 
 	idrsa := string(s.Data[util.PrivateSShKeyName])
-	host := fmt.Sprintf("gerrit.%v", namespace)
+	host := "gerrit-oc-green-mm-dev-dev.delivery.aws.main.edp.projects.epam.com"
 	if err := h.tryToCreateProjectInGerrit(sshPort, idrsa, host, codebaseName); err != nil {
 		return errors.Wrapf(err, "creation project in Gerrit for codebase %v has been failed", codebaseName)
 	}

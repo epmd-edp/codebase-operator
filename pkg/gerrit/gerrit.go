@@ -102,7 +102,7 @@ func SshInit(port int32, idrsa, host string) (SSHClient, error) {
 
 	client := &SSHClient{
 		Config: sshConfig,
-		Host:   host,
+		Host:   "gerrit-oc-green-mm-dev-dev.delivery.aws.main.edp.projects.epam.com",
 		Port:   port,
 	}
 	log.Printf("SSH Client has been initialized: Host: %v Port: %v", host, port)

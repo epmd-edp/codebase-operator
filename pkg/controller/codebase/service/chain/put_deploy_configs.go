@@ -114,7 +114,7 @@ func cloneProjectRepoFromGerrit(sshPort int32, idrsa, name, namespace, cloneSshU
 		s *ssh.Session
 		c *ssh.Client
 
-		h = fmt.Sprintf("gerrit.%v", namespace)
+		h = "gerrit-oc-green-mm-dev-dev.delivery.aws.main.edp.projects.epam.com"
 	)
 
 	sshcl, err := gerrit.SshInit(sshPort, idrsa, h)
