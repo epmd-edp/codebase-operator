@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b67f120b_7a86c0ff",
+        "filename": "build/templates/applications/openshift-template/python/python.tmpl",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-08-05T10:01:45Z",
+      "side": 1,
+      "message": "Let\u0027s move to the current 2020 year )",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "bf994f8dbd50ce057438f9ea3d4e95cbd4574991",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a4c7404_47594597",
+        "filename": "build/templates/applications/openshift-template/python/python.tmpl",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-08-05T10:01:45Z",
+      "side": 1,
+      "message": "I believe we should update these lines to Python icon and description",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 81
+      },
+      "revId": "bf994f8dbd50ce057438f9ea3d4e95cbd4574991",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
