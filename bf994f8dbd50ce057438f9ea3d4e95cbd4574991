@@ -45,6 +45,23 @@
       "revId": "bf994f8dbd50ce057438f9ea3d4e95cbd4574991",
       "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cadf402_ca28ef66",
+        "filename": "pkg/controller/codebase/service/chain/put_version_file.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-08-05T10:13:15Z",
+      "side": 1,
+      "message": "why are you checking language in this condition ?",
+      "revId": "bf994f8dbd50ce057438f9ea3d4e95cbd4574991",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
     }
   ]
 }
