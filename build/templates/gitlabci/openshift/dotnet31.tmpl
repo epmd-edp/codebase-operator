@@ -1,0 +1,137 @@
+variables:
+  NAMESPACE: {{.Namespace}}
+  PROJECT_NAME: {{.CodebaseName}}
+  VERSIONING_TYPE: {{.VersioningType}}
+  CLUSTER_URL: {{.ClusterUrl}}
+
+default:
+  image: epamedp/edp-jenkins-dotnet-31-agent:1.0.0
+
+stages:
+  - init
+  - set-version
+  - compile
+  - unit-tests
+  - build
+  - build-image
+  - create-ist
+  - create-tag
+
+.before_script_login_to_cluster:
+  before_script:
+     - oc login $CLUSTER_URL --token=$OPENSHIFT_SA_TOKEN;
+
+init:
+  extends: .before_script_login_to_cluster
+  stage: init
+  script:
+    - >
+      echo $CI_COMMIT_BRANCH
+      buildNumber=$(oc -n $NAMESPACE get codebasebranches.v2 $PROJECT_NAME-$CI_COMMIT_BRANCH -o jsonpath="{.status.build}");
+      buildNumber=$((buildNumber+1));
+      deployableModule=$(find ./ -name *.csproj | xargs grep -Poh '<DeployableModule>\K[^<]*');
+      projectVersion=$(find ${deployableModule} -name *.csproj | xargs grep -Po '<Version>\K[^<]*');
+      if [ "$VERSIONING_TYPE" == "edp" ]; then
+          version=$(oc -n $NAMESPACE get codebasebranches.v2 $PROJECT_NAME-$CI_COMMIT_BRANCH -o jsonpath="{.spec.version}");
+          codebaseImageStreamName=$PROJECT_NAME-edp-$(echo $CI_COMMIT_BRANCH | sed 's/\//-/g;s/\./-/g');
+          isTag=$version.$buildNumber;
+          crName=$codebaseImageStreamName-$(echo $isTag | sed 's/\//-/g;s/\./-/g' | awk '{print tolower($0)}');
+          echo "version=$version" >> build.properties;
+      else
+          codebaseImageStreamName=$PROJECT_NAME-$(echo $CI_COMMIT_BRANCH | sed 's/\//-/g;s/\./-/g');
+          isTag="$CI_COMMIT_BRANCH-$projectVersion-$buildNumber";
+          crName=$codebaseImageStreamName-$(echo $isTag | sed 's/\//-/g;s/\./-/g' | awk '{print tolower($0)}');
+      fi
+    - echo $deployableModule; 
+    - echo $projectVersion;
+    - echo $isTag;
+    - echo "crName=$crName" >> build.properties;
+    - echo "codebaseImageStreamName=$codebaseImageStreamName" >> build.properties;
+    - echo "isTag=$isTag" >> build.properties;
+    - echo "buildNumber=$buildNumber" >> build.properties;
+  artifacts:
+    paths:
+      - build.properties
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+set-version:
+    extends: .before_script_login_to_cluster
+    stage: set-version
+    dependencies:
+      - init
+    script:
+      - >
+        buildNumber=$(grep buildNumber "build.properties" | awk -F= '{print $2}');
+        echo $buildNumber;
+        oc -n $NAMESPACE patch codebasebranches.v2 $PROJECT_NAME-$CI_COMMIT_BRANCH --type=merge -p "{\"status\": {\"build\": "\"$buildNumber\""}}";
+        if [ "$VERSIONING_TYPE" == "edp" ]; then
+            version=$(grep version $"build.properties" | awk -F= '{print $2}')
+            isRelease=$(oc -n $NAMESPACE get codebasebranches.v2 $PROJECT_NAME-$CI_COMMIT_BRANCH -o jsonpath="{.spec.release}");
+            set -eo pipefail;
+        	if $isRelease; then
+        		newProjectVersion=$version-$buildNumber;
+        	else
+            	newProjectVersion=$version;
+        	fi
+            sed -i "s/<version>$projectVersion<\/version>/<version>$newProjectVersion<\/version>/" aspnetapp/aspnetapp.csproj
+         fi
+    rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+
+compile:
+  stage: compile
+  script:
+    - export TMPDIR=/tmp/NuGetScratch/;
+    - mkdir -p $TMPDIR;
+    - sln_filename=$(ls *.sln);
+    - dotnet build ${sln_filename};
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+unit-tests:
+  stage: unit-tests
+  script:
+    - > 
+      export TMPDIR=/tmp/NuGetScratch/;
+      mkdir -p $TMPDIR;
+      ls *Tests*/*.csproj | xargs -L1 dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+build:
+  stage: build
+  script:
+    - export TMPDIR=/tmp/NuGetScratch/;
+    - mkdir -p $TMPDIR;
+    - sln_filename=$(ls *.sln);
+    - dotnet build ${sln_filename};
+  artifacts:
+    paths:
+    - aspnetapp/bin/Debug/netcoreapp3.1/*
+    expire_in: 2 mins
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+build-image:
+  image: docker:19.03.12
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DAEMON_OPTIONS: "--insecure-registry=$DOCKER_REGISTRY_URL"
+  services:
+    - name: docker:19.03.12-dind
+      entrypoint: [ "sh", "-c", "dockerd-entrypoint.sh $DOCKER_DAEMON_OPTIONS" ]
+  stage: build-image
+  dependencies:
+    - init
+    - build
+  script:
+    - isTag=$(grep isTag "build.properties" | awk -F= '{print $2}');
+    - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY_URL
+    - docker build -t $PROJECT_NAME .
+    - docker tag $PROJECT_NAME "$DOCKER_REGISTRY_URL/$NAMESPACE/$PROJECT_NAME-$CI_COMMIT_BRANCH:$isTag"
+    - docker push "$DOCKER_REGISTRY_URL/$NAMESPACE/$PROJECT_NAME-$CI_COMMIT_BRANCH:$isTag"
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
