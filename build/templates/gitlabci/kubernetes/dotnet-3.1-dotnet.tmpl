@@ -51,7 +51,8 @@ init:
     - echo "crName=$crName" >> build.properties;
     - echo "codebaseImageStreamName=$codebaseImageStreamName" >> build.properties;
     - echo "isTag=$isTag" >> build.properties;
-    - echo "buildNumber=$buildNumber" >> build.properties;
+    - echo "buildNumber=$bu
+  - >ildNumber" >> build.properties;
   artifacts:
     paths:
       - build.properties
@@ -173,6 +174,7 @@ create-git-tag:
         if [ "$VERSIONING_TYPE" == "edp" ]; then
           isTag=build/$isTag;
         fi
+      - >
         codebaseImageStreamName=$(grep codebaseImageStreamName "build.properties" | awk -F= '{print $2}');
         gtName=$codebaseImageStreamName-$(echo $isTag | sed 's/\//-/g;s/\./-/g' | awk '{print tolower($0)}');
         kubectl -n $NAMESPACE get cm gt-template -o jsonpath="{.data.gt\\.json}"

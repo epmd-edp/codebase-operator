@@ -50,7 +50,8 @@ init:
     - if: $CI_COMMIT_BRANCH && '$CI_PIPELINE_SOURCE != "merge_request_event"'
 
 set-version:
-    extends: .before_script_login_to_cluster
+    extends: .before_script
+  - >_login_to_cluster
     stage: set-version
     dependencies:
       - init
@@ -146,6 +147,7 @@ create-git-tag:
         if [ "$VERSIONING_TYPE" == "edp" ]; then
           isTag=build/$isTag;
         fi
+      - >
         codebaseImageStreamName=$(grep codebaseImageStreamName "build.properties" | awk -F= '{print $2}');
         gtName=$codebaseImageStreamName-$(echo $isTag | sed 's/\//-/g;s/\./-/g' | awk '{print tolower($0)}');
         oc -n $NAMESPACE get cm gt-template -o jsonpath="{.data.gt\\.json}"
