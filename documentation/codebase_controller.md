@@ -16,14 +16,20 @@ The diagram above displays two branches (flows) that represents the difference b
 of EDP. The source code is pulling from the repository, that is specified in Codebase CR (clone strategy), or from one of 
 the predefined (create strategy). 
 
-The **import** strategy flow consists of the following steps:
-
-- *Clone Git Repository*. The existence of the repository from Codebase CR is checked and the repository is pulled
-in to the temporary workspace.
-- *Ensure Deploy Config in Git*. Instructions on how to deploy this codebase in Kubernetes are added (represented as Helm charts).
-- *Ensure S2i Image Stream*. The deprecated step that should be deleted in https://jiraeu.epam.com/browse/EPMDEDP-4116.
-- *Ensure Jenkins Folder CR*. Custom resource for Jenkins folder is added to hold CI/CD pipelines related to this codebase.
-- *Cleaner*. The technical step, it ensures that all workspaces are wiped out.
+The **import** strategy flow consists of two following chains:
+- *Gitlab CI* chain.        
+    - *Clone Git Repository*. The existence of the repository from Codebase CR is checked and the repository is pulled
+    in to the temporary workspace.
+    - *Ensure Deploy Config in Git*. Instructions on how to deploy this codebase in Kubernetes are added (represented as Helm charts).
+    - *Ensure Gitlab CI template in Git*. Instructions on how to build codebase in Gitlab CI (represented as Gitlab CI template).
+    - *Cleaner*. The technical step, it ensures that all workspaces are wiped out.
+- *Jenkins* chain.
+    - *Clone Git Repository*. The existence of the repository from Codebase CR is checked and the repository is pulled
+    in to the temporary workspace.
+    - *Ensure Deploy Config in Git*. Instructions on how to deploy this codebase in Kubernetes are added (represented as Helm charts).
+    - *Ensure S2i Image Stream*. The deprecated step that should be deleted in https://jiraeu.epam.com/browse/EPMDEDP-4116.
+    - *Ensure Jenkins Folder CR*. Custom resource for Jenkins folder is added to hold CI/CD pipelines related to this codebase.
+    - *Cleaner*. The technical step, it ensures that all workspaces are wiped out.
 
 The **clone** and **create** strategy flow includes the following steps:
 
