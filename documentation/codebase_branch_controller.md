@@ -40,3 +40,13 @@ When a new version for this codebase branch is set, the last successful build sh
 in the special Jenkins job **Create-release-CodebaseName** that should be created during the codebase CR provisioning. 
 The codebase controller triggers the job with the parameters (branch name and commit id) and ensures that the job has 
 the blue status, i.e. has finished successfully.
+
+If GitlabCi tool was selected for codebase, then:
+
+- *Check Parent Codebase*. Each codebase branch has a parent codebase and it cannot be reconciled until the parent codebase finishes its reconcilation.
+The parent codebase is retrieved by the `*spec.codebaseName"` field so as the `status.available` field is checked with the
+value "true". Otherwise, the loop ends up with an error.
+
+- *Create branch in GIT repository*. Creates branch in Git provider
+- *Create branch in GIT repository*. Create appropriate CodebaseImageStream CR for branch
+- *Clean temp directory in pod*. Remove temp files from pod
