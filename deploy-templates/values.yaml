@@ -1,5 +1,5 @@
 global:
-  edpName: ""
+  edpName: "edp"
   platform: "openshift"
   database:
     port: 5432
@@ -9,7 +9,7 @@ global:
 name: codebase-operator
 image:
   name: epamedp/codebase-operator
-  version: v2.4.0
+  version: v2.5.0
 
 jira:
   integration: true
