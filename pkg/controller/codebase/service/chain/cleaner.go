@@ -23,7 +23,7 @@ func (h Cleaner) ServeRequest(c *v1alpha1.Codebase) error {
 		setFailedFields(c, v1alpha1.CleanData, err.Error())
 		return err
 	}
-	rLog.Info("end cleaning data...")
+	rLog.Info("e1nd cleaning data...")
 	return nextServeOrNil(h.next, c)
 }
 
