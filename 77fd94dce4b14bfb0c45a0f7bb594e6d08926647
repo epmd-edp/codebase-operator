@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "024c2608_6b05024c",
+        "filename": "pkg/controller/codebase/codebase_controller.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-11-04T10:23:58Z",
+      "side": 1,
+      "message": "may we create repo outside this method ? not mix logic for creating with creating chain",
+      "revId": "77fd94dce4b14bfb0c45a0f7bb594e6d08926647",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
