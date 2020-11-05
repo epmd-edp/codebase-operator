@@ -7,6 +7,8 @@ import (
 	"github.com/epmd-edp/codebase-operator/v2/db"
 	edpv1alpha1 "github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/repository"
+	"github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/repository/k8s"
+	reposql "github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/repository/sql"
 	"github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/service/chain"
 	cHand "github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/service/chain/handler"
 	validate "github.com/epmd-edp/codebase-operator/v2/pkg/controller/codebase/validation"
@@ -220,9 +222,9 @@ func (r ReconcileCodebase) getStrategyChain(c *edpv1alpha1.Codebase) (cHand.Code
 
 func (r ReconcileCodebase) createCodebaseRepo(c *edpv1alpha1.Codebase) repository.CodebaseRepository {
 	if r.db == nil {
-		return repository.NewK8SCodebaseRepository(r.client, c)
+		return k8s.NewK8SCodebaseRepository(r.client, c)
 	}
-	return repository.SqlCodebaseRepository{DB: r.db}
+	return reposql.CodebaseRepository{DB: r.db}
 }
 
 func (r ReconcileCodebase) getCiChain(c *edpv1alpha1.Codebase, cs *openshift.ClientSet,
