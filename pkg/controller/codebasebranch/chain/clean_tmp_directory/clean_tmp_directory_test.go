@@ -1,4 +1,4 @@
-package chain
+package clean_tmp_directory
 
 import (
 	"github.com/epmd-edp/codebase-operator/v2/pkg/apis/edp/v1alpha1"
