@@ -1,4 +1,4 @@
-package repository
+package sql
 
 import (
 	"database/sql"
@@ -10,11 +10,11 @@ const (
 	setProjectStatusValue    = "update \"%v\".codebase set project_status = $1 where name = $2 ;"
 )
 
-type SqlCodebaseRepository struct {
+type CodebaseRepository struct {
 	DB *sql.DB
 }
 
-func (r SqlCodebaseRepository) SelectProjectStatusValue(name, schema string) (*string, error) {
+func (r CodebaseRepository) SelectProjectStatusValue(name, schema string) (*string, error) {
 	stmt, err := r.DB.Prepare(fmt.Sprintf(selectProjectStatusValue, schema))
 	if err != nil {
 		return nil, err
@@ -28,7 +28,7 @@ func (r SqlCodebaseRepository) SelectProjectStatusValue(name, schema string) (*s
 	return s, nil
 }
 
-func (r SqlCodebaseRepository) UpdateProjectStatusValue(status, name, schema string) error {
+func (r CodebaseRepository) UpdateProjectStatusValue(status, name, schema string) error {
 	stmt, err := r.DB.Prepare(fmt.Sprintf(setProjectStatusValue, schema))
 	if err != nil {
 		return err
