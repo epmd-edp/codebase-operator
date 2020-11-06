@@ -99,6 +99,8 @@ spec:
                   type: string
                 dataSources:
                   type: array
+            DefaultBranch:
+              type: string
           required:
             - lang
             - type
