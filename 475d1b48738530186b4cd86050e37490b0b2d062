@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2e93b85_3b47d5ce",
+        "filename": "pkg/apis/edp/v1alpha1/codebase_types.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-11-06T13:44:32Z",
+      "side": 1,
+      "message": "add it to crd too",
+      "revId": "475d1b48738530186b4cd86050e37490b0b2d062",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
