@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43d8dd55_b7f52f88",
+        "filename": "deploy-templates/crds/edp_v1alpha1_codebase_crd.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-11-06T13:56:04Z",
+      "side": 1,
+      "message": "defaultBranch\n\nadd as required",
+      "revId": "e48a448d6994e6581c1024ebd12f5bec9151be91",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb84b545_8e831e01",
+        "filename": "deploy/crds/edp_v1alpha1_codebase_crd.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-11-06T13:56:04Z",
+      "side": 1,
+      "message": "defaultBranch\n\nadd as required",
+      "revId": "e48a448d6994e6581c1024ebd12f5bec9151be91",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24ea139f_cf31247e",
+        "filename": "pkg/apis/edp/v1alpha1/codebase_types.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-11-06T13:56:04Z",
+      "side": 1,
+      "message": "rename to defaultBranch",
+      "revId": "e48a448d6994e6581c1024ebd12f5bec9151be91",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
