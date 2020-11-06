@@ -71,6 +71,7 @@ type CodebaseSpec struct {
 	TicketNamePattern    *string     `json:"ticketNamePattern"`
 	CiTool               string      `json:"ciTool"`
 	Perf                 *Perf       `json:"perf"`
+	DefaultBranch        string      `json:"defaultBranchName"`
 }
 
 // CodebaseStatus defines the observed state of Codebase
