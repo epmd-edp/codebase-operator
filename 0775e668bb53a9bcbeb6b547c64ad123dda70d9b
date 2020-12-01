@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d3f42df_e2d4caf0",
+        "filename": "pkg/controller/jirafixversion/jira_fix_version_controller.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-12-01T12:05:07Z",
+      "side": 1,
+      "message": "available property always will be false\n\nyou didnt fetch actual state of resource",
+      "revId": "0775e668bb53a9bcbeb6b547c64ad123dda70d9b",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
