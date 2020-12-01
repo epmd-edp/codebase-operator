@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d301f5e_f25de492",
+        "filename": "pkg/controller/jirafixversion/jira_fix_version_controller.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-12-01T12:50:40Z",
+      "side": 1,
+      "message": "specify which jira server",
+      "revId": "f4d3d976eb79d3c1616611ab7fcdf6742e02e837",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10f3c966_446c3897",
+        "filename": "pkg/controller/jirafixversion/jira_fix_version_controller.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-12-01T12:50:40Z",
+      "side": 1,
+      "message": "pass jirafixversion object which u got previously to method\nu dont need to make two identical requests to get object from cluster",
+      "revId": "f4d3d976eb79d3c1616611ab7fcdf6742e02e837",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
