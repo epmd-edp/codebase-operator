@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc2b6bd0_76650b36",
+        "filename": "pkg/controller/jirafixversion/jira_fix_version_controller.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-12-01T15:01:35Z",
+      "side": 1,
+      "message": "u have to handle error right after calling the function",
+      "revId": "8c4b80fba6a79b96710319ca7ed20204a572a7b3",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fe30850_9b5a38c9",
+        "filename": "pkg/controller/jirafixversion/jira_fix_version_controller.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2020-12-01T15:01:35Z",
+      "side": 1,
+      "message": "it\u0027s not an error. u just need to notify that Jira is unavailable. use \u0027info\u0027 level instead of error with specifying jira server name",
+      "revId": "8c4b80fba6a79b96710319ca7ed20204a572a7b3",
+      "serverId": "0350cb7f-c1b1-4710-a647-f6632dbafb3c",
+      "unresolved": true
+    }
+  ]
+}
