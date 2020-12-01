@@ -102,6 +102,12 @@ func (r *ReconcileJiraFixVersion) Reconcile(request reconcile.Request) (reconcil
 		return reconcile.Result{}, err
 	}
 
+	js, err := r.getJiraServer(*i)
+	if !js.Status.Available {
+		log.Info("Waiting for Jira server become available")
+		return reconcile.Result{RequeueAfter: setFailureCount(i)}, nil
+	}
+
 	jc, err := r.initJiraClient(*i)
 	if err != nil {
 		setErrorStatus(i, err.Error())
@@ -175,14 +181,7 @@ func (r *ReconcileJiraFixVersion) initJiraClient(version edpv1alpha1.JiraFixVers
 	if err != nil {
 		return nil, errors.Wrapf(err, "couldn't get secret %v", server.Spec.CredentialName)
 	}
-
-	// Check Jira server availability status:
-	status := server.Status.Available
-	if status == false {
-		log.Info("Waiting for Jira server become available. Sleeping for 60 seconds...")
-		time.Sleep(60 * time.Second)
-	}
-
+	
 	user := string(s.Data["username"])
 	pwd := string(s.Data["password"])
 	c, err := new(adapter.GoJiraAdapterFactory).New(dto.ConvertSpecToJiraServer(server.Spec.ApiUrl, user, pwd))
