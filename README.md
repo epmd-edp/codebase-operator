@@ -1,3 +1,6 @@
+|![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/156px-Warning.svg.png) | This project is moved to [https://github.com/epam/edp-codebase-operator](https://github.com/epam/edp-codebase-operator)
+|---|---|
+
 # Codebase Operator
 
 Get acquainted with the Codebase Operator and the installation process as well as the local development, 
